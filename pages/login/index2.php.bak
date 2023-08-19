@@ -1,0 +1,243 @@
+<?php
+use jesuzweq\System;
+include_once('../../system/main.php');
+use jesuzweq\JesuLogin;
+
+ob_start();
+session_start();
+
+@$authKey = @$_POST['password'];
+if(@$authKey) {
+    @$alert = @JesuLogin::login();
+}
+
+@$userName = @$_POST['username'];
+if(@$userName) {
+    @$alert = @JesuLogin::login();
+}
+
+
+if(isset($_SESSION['authKey'])) {
+    // Kullanıcı adı ve oturum değişkeni doğrulandı, panel sayfasına yönlendir
+    header("Location: /panel");
+    exit();
+}
+
+
+
+
+
+?>
+<!doctype html>
+<html lang="tr" data-layout="vertical" data-layout-style="default" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-layout-mode="dark" data-layout-position="fixed"><!-- <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none"> --><head>
+    <meta charset="utf-8">
+    <title>
+        edited by sentinel#1000    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="giris yap & kaydol" name="description">
+    <meta content="Reawy" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/lexas-logo.ico">
+
+    <!-- Layout config Js -->
+    <script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/1h-hbVSJRMOQsmO_2qL9cO0z/recaptcha__tr.js" crossorigin="anonymous" integrity="sha384-aSB/WLeHduSG1awJGKmgjXRk9Se8XsBBIqJdRMWVndQl+ddLvWDWRIPHjldciBYb"></script><script src="https://www.wrist.com.tr/assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <!-- App Css-->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css">
+    <!-- custom Css-->
+    <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css">
+
+    <!--datatable css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <!--datatable responsive css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+    <!-- Sweet Alert css-->
+    <link href="https://www.wrist.com.tr/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+</head>
+
+<body>
+    <div class="auth-page-wrapper ">
+        <!-- auth page content -->
+        <div class="auth-page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mt-sm-5 mb-4 text-white-50">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card mt-4">
+
+                            <!-- Danger Alert -->
+                                                            
+
+                            
+                            
+                            
+                            
+                            
+                            
+                            <div class="card-body ">
+                                <div class="text-center ">
+                                    <a class="d-inline-block auth-logo">
+                                        <img src="../assets/images/lexas-logo.png" id="logo-login" alt="" width="100" >
+                                        <style>
+                                            #logo-login:hover {
+                                                transition: 500ms;
+                                                transform: scale(2.5);
+                                                filter: brightness(1);
+                                                /* width: 155px;
+                                            height: 157px; */
+                                            }
+
+                                            #logo-login {
+                                                transition: 500ms;
+                                                filter: brightness(0.7);
+                                                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+                                                -webkit-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+                                                transform: scale(2);
+                                            }
+                                        </style>
+                                    </a>
+                                    <br>
+                                    <br>
+                                  
+                                 
+                                    <h5 class="text" id="lexas-text">VİP Panel'e tekrardan hoşgeldin!
+                                        <style>
+                                            #lexas-text:hover {
+                                                transition: 500ms;
+                                                transform: scale(1.5);
+                                                filter: brightness(1);
+                                                /* width: 155px;
+                                            height: 157px; */
+                                            }
+
+                                            #lexas-text {
+                                                transition: 500ms;
+                                                filter: brightness(0.7);
+                                                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+                                                -webkit-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+                                                transform: scale(1);
+                                            }
+                                        </style>
+                                    </h5>
+                                  <strong>  <p><font color="green">Üyeliğiniz başarıyla oluşturuldu giriş yapabilirsiniz. </p></font></strong>
+                                  
+                                    
+                                </div>
+                                <div class="p-2 mt-4">
+                                    <form method="POST">
+                                    <div class="mb-3">
+                                            <label for="username" class="form-label">Kullanıcı adı</label>
+                                            <input type="username" name="username" class="form-control" id="username" placeholder="Kullanıcı adınızı giriniz." required="" oninvalid="this.setCustomValidity('Lütfen bir kullanıcı adı giriniz.')" oninput="this.setCustomValidity('')">
+                                        </div>
+                                          
+                                        <div class="mb-3">
+                                            <label for="username" class="form-label">Şifre</label>
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Şifrenizi giriniz." required="" oninvalid="this.setCustomValidity('Lütfen bir anahtar giriniz.')" oninput="this.setCustomValidity('')">
+                                        </div>
+
+                                    
+
+                                        <div class="mt-4">
+                                            <button class="btn btn-soft-success w-100" name="loginForm" type="submit">Giriş yap, maceraya atla!</button>
+                                        </div>
+										
+										</form>
+                                        <div class="mt-4 text-center" style="display: flex; justify-content: center; align-items: center; flex-direction: column; space-between: 10px;">
+                                        
+                                        <div class="w-100 mb-2">
+                                        <div class="signin-other-title">
+                                            <h5 class="fs-13 mb-4 title">Herhangi bi sorun için</h5>
+                                        </div>
+                                            <button class="btn btn-soft-secondary btn-icon waves-effect waves-light w-100" onclick="window.location.href='https://discord.gg/vippanel'">
+                                                <p class="mb-0"> Discord</p>
+                                            </button>
+
+                                            
+                                        </div>
+                                        <div class="w-100 mb-2">
+                                        <div class="signin-other-title">
+                                            <h5 class="fs-13 mb-4 title">Kayıt Olmak için</h5>
+
+                                        <button class="btn btn-soft-secondary btn-icon waves-effect waves-light w-100" onclick="window.location.href='/register'">
+                                                <p class="mb-0">Kayıt Ol</p>
+                                            </button>
+                                        </div>
+                                        <div class="w-100 mb-2">
+                                        <div class="signin-other-title">
+                                            
+
+                                        
+                                        </div>
+                                        
+                                        
+
+                                    </div>
+                                   
+
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end auth page content -->
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <p class="mb-0 text-muted">
+                         coded&edited by Sentinel#1000
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
+    </div>
+
+    <!-- prismjs plugin -->
+    <script src="https://www.wrist.com.tr/assets/libs/prismjs/prism.js"></script>
+
+    <!-- notifications init -->
+    <script src="localhost/assets/js/pages/notifications.init.js"></script>
+
+    <!-- Sweet Alerts js -->
+    <script src="localhost/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="localhost/assets/js/pages/sweetalerts.init.js"></script>
+
+    <!-- recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
+
+
+
+
+</div></body></html>
